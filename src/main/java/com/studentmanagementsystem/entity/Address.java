@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -19,20 +18,15 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false,length = 25)
-    private String street;
-
-    @Column(nullable = false, length = 25)
     private String city;
 
-    @Column(nullable = false, length = 25)
+    private String area;
+
+    private Integer zip;
+
+    private String district;
+
     private String state;
-
-    @Column(nullable = false, length = 10)
-    private String zip;
-
-    @Column(nullable = false, length = 40)
-    private String country;
 
     @OneToOne
     @ToString.Exclude
