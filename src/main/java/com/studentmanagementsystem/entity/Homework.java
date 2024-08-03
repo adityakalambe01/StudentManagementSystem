@@ -16,11 +16,10 @@ import java.util.Date;
 public class Homework {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String content;
 
-    @Column(name = "grade", columnDefinition = "varchar(2) default 'NA'")
     private String gradeObtained;
 
     private String details;
