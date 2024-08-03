@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -16,7 +17,7 @@ import java.util.List;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String firstName;
 
@@ -32,9 +33,9 @@ public class Teacher {
 
     @ManyToOne
     @ToString.Exclude
-    private School school;
+    private School schools;
 
     @OneToMany(mappedBy = "teacher")
     @ToString.Exclude
-    private List<Classroom> classroomList;
+    private List<Classroom> classroomList = new LinkedList<>();
 }
