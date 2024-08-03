@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
+@Transactional
 public class AddressServiceImpl implements AddressService {
     @Autowired
     private AddressRepository addressRepository;
@@ -66,6 +69,4 @@ public class AddressServiceImpl implements AddressService {
         updatedAddress.setId(id);
         return findById(id)==null? null : addressRepository.save(updatedAddress);
     }
-
-
 }
