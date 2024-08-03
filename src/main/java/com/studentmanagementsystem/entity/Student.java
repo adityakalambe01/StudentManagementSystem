@@ -1,11 +1,10 @@
 package com.studentmanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -16,7 +15,7 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String firstName;
 
@@ -30,21 +29,26 @@ public class Student {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Classroom> classes;
+    private List<Classroom> classes = new LinkedList<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "student")
-    private List<Report> reportList;
+    private List<Report> reportList = new LinkedList<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "student")
-    private List<Homework> homeworkList;
+    private List<Homework> homeworkList = new LinkedList<>();
 
     @ManyToMany
     @ToString.Exclude
-    private List<Parent> parents;
+    private List<Parent> parents = new LinkedList<>();
 
     @ManyToMany
     @ToString.Exclude
-    private List<Address> addresses;
+    private List<Address> addresses = new LinkedList<>();
+
+    @JsonIgnore
+    @ManyToOne
+    @ToString.Exclude
+    private School school;
 }
