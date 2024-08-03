@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.lang.NonNull;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.List;
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String code;
@@ -27,14 +28,13 @@ public class Classroom {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "classroom")
-    private List<Subject> subjectList;
+    private List<Subject> subjectList = new LinkedList<>();
 
     @ManyToOne
     @ToString.Exclude
     private Teacher teacher;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "classes")
     @ToString.Exclude
-    @JoinTable(name = "classes")
-    private List<Student> studentsInClassroom;
+    private List<Student> students = new LinkedList<>();
 }
