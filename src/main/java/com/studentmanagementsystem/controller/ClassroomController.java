@@ -4,7 +4,6 @@ import com.studentmanagementsystem.entity.Classroom;
 import com.studentmanagementsystem.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class ClassroomController {
         return classroomService.save(classroom);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public Classroom findById(@PathVariable("id") int id) {
         return classroomService.findById(id);
     }
@@ -33,27 +32,27 @@ public class ClassroomController {
         return classroomService.findAll(PageRequest.of(pageNumber, pageSize)).getContent();
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/name-{name}")
     public Classroom findByName(@PathVariable("name") String name) {
         return classroomService.findByName(name);
     }
 
-    @GetMapping("/code/{code}")
+    @GetMapping("/code-{code}")
     public Classroom findByCode(@PathVariable("code") String code) {
         return classroomService.findByCode(code);
     }
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("/{id}")
     public Classroom deleteById(@PathVariable("id") int id) {
         return classroomService.deleteById(id);
     }
 
-    @DeleteMapping("/code/{code}")
+    @DeleteMapping("/code-{code}")
     public Classroom deleteByCode(@PathVariable("code") String code) {
         return classroomService.deleteByCode(code);
     }
 
-    @DeleteMapping("/name/{name}")
+    @DeleteMapping("/name-{name}")
     public Classroom deleteByName(@PathVariable("name") String name) {
         return classroomService.deleteByName(name);
     }
