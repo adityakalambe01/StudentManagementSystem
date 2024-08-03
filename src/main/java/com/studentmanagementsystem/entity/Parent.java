@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -16,7 +17,7 @@ import java.util.List;
 public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String gender;
 
@@ -28,10 +29,9 @@ public class Parent {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Address> addresseList;
+    private List<Address> address = new LinkedList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "parents")
     @ToString.Exclude
-    @JoinTable(name = "parents")
-    private List<Student> student;
+    private List<Student> student = new LinkedList<>();
 }
