@@ -14,6 +14,11 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
+    @PostMapping
+    public Address save(@RequestBody Address address) {
+        return addressService.save(address);
+    }
+
     @GetMapping
     public List<Address> getAddress(
             @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
@@ -23,31 +28,31 @@ public class AddressController {
     }
 
     @GetMapping(value = "/{id}")
-    public Address getAddressById(@PathVariable("id") int id) {
+    public Address getAddressById(@PathVariable(value = "id") int id) {
         return addressService.findById(id);
     }
 
-    @GetMapping(value = "/area/{area}")
+    @GetMapping(value = "/area-{area}")
     public List<Address> getAddressByArea(@PathVariable("area") String area) {
         return addressService.findByAreaContaining(area);
     }
 
-    @GetMapping(value = "/city/{city}")
+    @GetMapping(value = "/city-{city}")
     public List<Address> getAddressByCity(@PathVariable("city") String city) {
         return addressService.findByCityContaining(city);
     }
 
-    @GetMapping(value = "/state/{state}")
+    @GetMapping(value = "/state-{state}")
     public List<Address> getAddressByState(@PathVariable("state") String state) {
         return addressService.findByStateContaining(state);
     }
 
-    @GetMapping(value = "/district/{district}")
+    @GetMapping(value = "/district-{district}")
     public List<Address> getAddressByDistrict(@PathVariable("district") String district) {
         return addressService.findByDistrictContaining(district);
     }
 
-    @GetMapping(value = "/zip/{zip}")
+    @GetMapping(value = "/zip-{zip}")
     public List<Address> getAddressByZip(@PathVariable("zip") Integer zip) {
         return addressService.findByZip(zip);
     }
@@ -57,9 +62,12 @@ public class AddressController {
         return addressService.deleteById(id);
     }
 
-    @PostMapping
-    public Address createAddress(@RequestBody Address address) {
-        return addressService.save(address);
+    @PostMapping(value = "/save-all-address")
+    public List<Address> saveAll(@RequestBody List<Address> addresses) {
+        for (Address address : addresses) {
+            addressService.save(address);
+        }
+        return addresses;
     }
 
     @PutMapping("/{id}")
