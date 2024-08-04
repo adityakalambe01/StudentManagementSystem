@@ -1,5 +1,6 @@
 package com.studentmanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +32,8 @@ public class Parent {
     @ToString.Exclude
     private List<Address> address = new LinkedList<>();
 
-    @ManyToMany(mappedBy = "parents")
+    @JsonIgnore
     @ToString.Exclude
+    @ManyToMany(mappedBy = "parents")
     private List<Student> student = new LinkedList<>();
 }
