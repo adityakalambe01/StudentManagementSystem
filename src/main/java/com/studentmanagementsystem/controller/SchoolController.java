@@ -3,6 +3,7 @@ package com.studentmanagementsystem.controller;
 import com.studentmanagementsystem.entity.School;
 import com.studentmanagementsystem.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +14,16 @@ public class SchoolController {
     @Autowired
     private SchoolService schoolService;
 
-    @PostMapping("/{schoolId}-school-address-{addressId}")
+    @PutMapping(value = "/{schoolId}-school-address-{addressId}")
     public School updateSchoolAddress(@PathVariable("schoolId") int schoolId, @PathVariable("addressId") int addressId) {
         return schoolService.updateSchoolAddress(schoolId, addressId);
     }
+
+    @PutMapping(value = "/{schoolId}-school-teacher-{teacherId}")
+    public School updateSchoolTeachers(@PathVariable("schoolId") int schoolId, @PathVariable("teacherId")  int teacherId){
+        return schoolService.updateSchoolTeachers(schoolId, teacherId);
+    }
+
     @GetMapping(value = "/{id}")
     public School findById(@PathVariable(value = "id") int id){
         return schoolService.findById(id);
@@ -39,8 +46,11 @@ public class SchoolController {
 
 
     @GetMapping
-    public List<School> findAll(){
-        return schoolService.findAll();
+    public List<School> findAll(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "50", required = false) Integer pageSize
+    ){
+        return schoolService.findAll(PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping(value = "/school-principle-{principle}")
