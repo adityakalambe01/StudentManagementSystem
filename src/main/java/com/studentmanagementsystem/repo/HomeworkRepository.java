@@ -1,7 +1,7 @@
 package com.studentmanagementsystem.repo;
 
-import com.studentmanagementsystem.entity.Classroom;
 import com.studentmanagementsystem.entity.Homework;
+import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @Repository
 public interface HomeworkRepository extends JpaRepository<Homework, Integer> {
-    Classroom save(Classroom classroom);
+    Homework save(@Nonnull Homework homework);
 
-    Classroom findById(int id);
+    Homework findById(int id);
 
-    Page<Homework> findAll(Pageable pageable);
+    Page<Homework> findAll(@Nonnull Pageable pageable);
 
     List<Homework> findByDateCreated(Date date);
 
@@ -27,6 +27,4 @@ public interface HomeworkRepository extends JpaRepository<Homework, Integer> {
     List<Homework> findByGradeObtainedIsIn(List<String> str);
 
     List<Homework> findByContentContaining(String content);
-
-
 }
