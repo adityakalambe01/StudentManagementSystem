@@ -13,6 +13,8 @@ public interface SchoolService {
 
     School updateSchoolAddress(int schoolId, int addressId);
 
+    public School updateSchoolStudent(int schoolId, int studentId);
+
     School updateSchoolTeachers(int schoolId, int teacherId);
 
     School deleteById(int id);
