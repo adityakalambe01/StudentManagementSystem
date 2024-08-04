@@ -9,6 +9,8 @@ import java.util.List;
 public interface TeacherService {
     Teacher findById(int id);
 
+    Teacher save(Teacher teacher);
+
     List<Teacher> findByFirstNameContaining(String firstName);
 
     List<Teacher> findByMiddleNameContaining(String middleName);
@@ -23,7 +25,7 @@ public interface TeacherService {
 
     List<Teacher> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(String firstName, String middleName, String lastName, String email);
 
-    Page<Teacher> findAll(Pageable pageable);
+    List<Teacher> findAll(Pageable pageable);
 
     Teacher deleteById(int id);
 }
