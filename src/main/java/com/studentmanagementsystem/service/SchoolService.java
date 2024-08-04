@@ -1,6 +1,7 @@
 package com.studentmanagementsystem.service;
 
 import com.studentmanagementsystem.entity.School;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -10,7 +11,9 @@ public interface SchoolService {
 
     School save(School school);
 
-    School updateSchoolAddress(@PathVariable("schoolId") int schoolId, @PathVariable("addressId") int addressId);
+    School updateSchoolAddress(int schoolId, int addressId);
+
+    School updateSchoolTeachers(int schoolId, int teacherId);
 
     School deleteById(int id);
 
@@ -18,7 +21,7 @@ public interface SchoolService {
 
     List<School> findByNameContaining(String name);
 
-    List<School> findAll();
+    public List<School> findAll(Pageable pageable);
 
     List<School> findByPrincipleContaining(String principle);
 
