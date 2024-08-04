@@ -2,10 +2,13 @@ package com.studentmanagementsystem.service.impl;
 
 import com.studentmanagementsystem.entity.Address;
 import com.studentmanagementsystem.entity.School;
+import com.studentmanagementsystem.entity.Teacher;
 import com.studentmanagementsystem.repo.SchoolRepository;
 import com.studentmanagementsystem.service.AddressService;
 import com.studentmanagementsystem.service.SchoolService;
+import com.studentmanagementsystem.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @Override
     public School findById(int id) {
@@ -41,6 +47,15 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
+    public School updateSchoolTeachers(int schoolId, int teacherId) {
+        Teacher teacher = teacherService.findById(teacherId);
+        School school = schoolRepository.findById(schoolId);
+        teacher.setSchools(school);
+        teacherService.save(teacher);
+        return school;
+    }
+
+    @Override
     public School deleteById(int id) {
         return schoolRepository.deleteById(id);
     }
@@ -56,8 +71,8 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<School> findAll() {
-        return schoolRepository.findAll();
+    public List<School> findAll(Pageable pageable) {
+        return schoolRepository.findAll(pageable).getContent();
     }
 
     @Override
