@@ -1,6 +1,8 @@
 package com.studentmanagementsystem.repo;
 
 import com.studentmanagementsystem.entity.School;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +20,7 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
 
     List<School> findByNameContaining(String name);
 
-    List<School> findAll();
+    Page<School> findAll(Pageable pageable);
 
     List<School> findByPrincipleContaining(String principle);
 
