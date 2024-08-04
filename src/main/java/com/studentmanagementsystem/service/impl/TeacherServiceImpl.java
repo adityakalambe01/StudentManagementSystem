@@ -23,6 +23,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public Teacher save(Teacher teacher) {
+        return teacherRepository.save(teacher);
+    }
+
+    @Override
     public List<Teacher> findByFirstNameContaining(String firstName) {
         return teacherRepository.findByFirstNameContaining(firstName);
     }
@@ -58,8 +63,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Page<Teacher> findAll(Pageable pageable) {
-        return teacherRepository.findAll(pageable);
+    public List<Teacher> findAll(Pageable pageable) {
+        return teacherRepository.findAll(pageable).getContent();
     }
 
     @Override
