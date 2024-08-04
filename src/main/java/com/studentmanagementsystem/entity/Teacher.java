@@ -1,5 +1,6 @@
 package com.studentmanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Teacher {
     private String gender;
 
     @ManyToOne
+    @JsonIgnore
     @ToString.Exclude
     private School schools;
 
