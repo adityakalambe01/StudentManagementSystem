@@ -4,6 +4,7 @@ import com.studentmanagementsystem.entity.Report;
 import com.studentmanagementsystem.entity.Student;
 import com.studentmanagementsystem.repo.ReportRepository;
 import com.studentmanagementsystem.service.ReportService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,5 +53,22 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Report> findByStudent(Student student) {
         return reportRepository.findByStudent(student);
+    }
+
+    @PostConstruct
+    public void init() {
+        if (reportRepository.count() == 0) {
+            for (int i = 1; i <= 100; i++) {
+                Report report = new Report();
+
+                report.setContent(new RandomNameGenerator().next(26, 100));
+
+                report.setTeacherComment(new RandomNameGenerator().next(26, 100));
+
+                report.setDateCreated(new Date());
+
+                reportRepository.save(report);
+            }
+        }
     }
 }
