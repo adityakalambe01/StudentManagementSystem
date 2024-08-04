@@ -35,11 +35,13 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<School> school;
 
-    @ManyToMany(mappedBy = "address")
+    @JsonIgnore
     @ToString.Exclude
+    @ManyToMany(mappedBy = "address")
     private List<Parent> parents = new LinkedList<>();
 
-    @ManyToMany(mappedBy = "addresses")
+    @JsonIgnore
     @ToString.Exclude
+    @ManyToMany(mappedBy = "addresses")
     private List<Student> students = new LinkedList<>();
 }
