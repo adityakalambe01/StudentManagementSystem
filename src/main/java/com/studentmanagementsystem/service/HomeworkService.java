@@ -9,9 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface HomeworkService {
-    Classroom save(Classroom classroom);
+    Homework save(Homework homework);
 
-    Classroom findById(int id);
+    Homework update(int homeworkId, Homework updatedHomework);
+
+    Homework findById(int id);
 
     Page<Homework> findAll(Pageable pageable);
 
