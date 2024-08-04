@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 public interface ClassroomService {
     Classroom save(Classroom classroom);
 
+    Classroom update(int classroomId, Classroom updatedClassroom);
+
     Classroom findById(int id);
 
     Classroom findByName(String name);
