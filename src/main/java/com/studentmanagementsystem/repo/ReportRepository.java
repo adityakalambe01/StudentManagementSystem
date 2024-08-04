@@ -2,6 +2,7 @@ package com.studentmanagementsystem.repo;
 
 import com.studentmanagementsystem.entity.Report;
 import com.studentmanagementsystem.entity.Student;
+import io.micrometer.common.lang.NonNullApi;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
+@NonNullApi
 public interface ReportRepository extends JpaRepository<Report, Integer> {
     Page<Report> findAll(Pageable pageable);
 
