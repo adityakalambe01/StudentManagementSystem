@@ -3,6 +3,7 @@ package com.studentmanagementsystem.service.impl;
 import com.studentmanagementsystem.entity.Address;
 import com.studentmanagementsystem.repo.AddressRepository;
 import com.studentmanagementsystem.service.AddressService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -68,5 +70,16 @@ public class AddressServiceImpl implements AddressService {
     public Address updateAddress(int id, Address updatedAddress) {
         updatedAddress.setId(id);
         return findById(id)==null? null : addressRepository.save(updatedAddress);
+    }
+
+    @PostConstruct
+    public void init() {
+        if (addressRepository.count() == 0) {
+            for (int i = 1; i <= 100; i++) {
+                Address address = new Address();
+                address.setZip(new RandomNameGenerator().nextInt(9, 6));
+                addressRepository.save(address);
+            }
+        }
     }
 }
