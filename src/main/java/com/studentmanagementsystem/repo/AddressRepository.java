@@ -29,5 +29,4 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
     List<Address> findByZip(Integer zipcode);
 
     Address deleteById(int id);
-
 }
