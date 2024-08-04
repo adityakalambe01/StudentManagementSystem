@@ -32,7 +32,6 @@ public class School {
     @OneToMany(mappedBy = "schools")
     private List<Teacher> teacherList = new LinkedList<>();
 
-//    @JsonIgnore
     @ManyToOne
     @ToString.Exclude
     private Address address;
