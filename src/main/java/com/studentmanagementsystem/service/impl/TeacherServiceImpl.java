@@ -2,7 +2,9 @@ package com.studentmanagementsystem.service.impl;
 
 import com.studentmanagementsystem.entity.Teacher;
 import com.studentmanagementsystem.repo.TeacherRepository;
+import com.studentmanagementsystem.service.SchoolService;
 import com.studentmanagementsystem.service.TeacherService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -70,5 +73,45 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher deleteById(int id) {
         return teacherRepository.deleteById(id);
+    }
+
+    @PostConstruct
+    public void init(){
+        if(teacherRepository.count()==0){
+            for (int i = 1; i <= 200000; i++) {
+                Teacher teacher = new Teacher();
+
+                teacher.setFirstName(
+                        new RandomNameGenerator().next(26, 5)
+                );
+
+                teacher.setMiddleName(
+                        new RandomNameGenerator().next(26, 5)
+                );
+
+                teacher.setLastName(
+                        new RandomNameGenerator().next(26, 5)
+                );
+
+                teacher.setEmail(
+                        new RandomNameGenerator().next(26, 8)
+                                        +
+                        new RandomNameGenerator().nextIntString(9, 4)
+                                        +
+                        "@gmail.com"
+                );
+
+                teacher.setPhoneNumber(
+                        new RandomNameGenerator().nextIntString(9, 10)
+                );
+
+                teacher.setGender(
+                        new String[]{"Male", "Female"}[new Random().nextInt(2)]
+                );
+
+                teacherRepository.save(teacher);
+            }
+        }
+
     }
 }
