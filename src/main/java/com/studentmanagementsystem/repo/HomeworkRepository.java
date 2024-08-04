@@ -1,6 +1,7 @@
 package com.studentmanagementsystem.repo;
 
 import com.studentmanagementsystem.entity.Homework;
+import io.micrometer.common.lang.NonNullApi;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
+@NonNullApi
 public interface HomeworkRepository extends JpaRepository<Homework, Integer> {
     Homework save(@Nonnull Homework homework);
 
