@@ -4,6 +4,7 @@ import com.studentmanagementsystem.entity.Student;
 import com.studentmanagementsystem.entity.Subject;
 import com.studentmanagementsystem.repo.SubjectRepository;
 import com.studentmanagementsystem.service.SubjectService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +37,20 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Page<Student> findAllByName(Pageable pageable, String name) {
         return subjectRepository.findAllByName(pageable, name);
+    }
+
+    @PostConstruct
+    public void init() {
+        if (subjectRepository.count() == 0) {
+            for (int i = 1; i <= 100000; i++) {
+                Subject subject = new Subject();
+
+                subject.setName(
+                        new RandomNameGenerator().next(26, 8)
+                );
+
+                subjectRepository.save(subject);
+            }
+        }
     }
 }
