@@ -14,12 +14,17 @@ public class SchoolController {
     @Autowired
     private SchoolService schoolService;
 
-    @PutMapping(value = "/{schoolId}-school-address-{addressId}")
+    @PutMapping(value = "/{schoolId}-school-{addressId}-address")
     public School updateSchoolAddress(@PathVariable("schoolId") int schoolId, @PathVariable("addressId") int addressId) {
         return schoolService.updateSchoolAddress(schoolId, addressId);
     }
 
-    @PutMapping(value = "/{schoolId}-school-teacher-{teacherId}")
+    @PutMapping(value = "/{schoolId}-school-{studentId}-student")
+    public School updateSchoolStudent(@PathVariable("schoolId") int schoolId,@PathVariable("studentId") int studentId){
+        return schoolService.updateSchoolStudent(schoolId, studentId);
+    }
+
+    @PutMapping(value = "/{schoolId}-school-{teacherId}-teacher")
     public School updateSchoolTeachers(@PathVariable("schoolId") int schoolId, @PathVariable("teacherId")  int teacherId){
         return schoolService.updateSchoolTeachers(schoolId, teacherId);
     }
@@ -62,6 +67,4 @@ public class SchoolController {
     public List<School> findByDetailsContaining(@PathVariable(value = "details") String details){
         return schoolService.findByDetailsContaining(details);
     }
-        
-
 }
