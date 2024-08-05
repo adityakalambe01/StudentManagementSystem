@@ -155,7 +155,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     /*
     *
-    * Default Data
+    * Add Dummy Data
     *
     * */
     public void init() {
