@@ -9,6 +9,8 @@ import java.util.List;
 public interface StudentService {
     Student findById(int id);
 
+    Student save(Student student);
+
     Student findByEmailContaining(String email);
 
     Student findByEmailContaining(String email, int schoolId);
@@ -23,7 +25,7 @@ public interface StudentService {
 
     List<Student> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(String firstName, String middleName, String lastName, String email);
 
-    Page<Student> findAll(Pageable pageable);
+    List<Student> findAll(Pageable pageable);
 
     Student deleteById(int id);
 }
