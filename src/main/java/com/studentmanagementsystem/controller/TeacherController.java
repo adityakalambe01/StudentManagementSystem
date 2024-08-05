@@ -62,5 +62,4 @@ public class TeacherController {
     public Teacher deleteById(int id){
         return teacherService.deleteById(id);
     }
-        
 }
