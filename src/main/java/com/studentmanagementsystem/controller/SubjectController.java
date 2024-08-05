@@ -17,7 +17,7 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
-    Student findById(int id){
+    Subject findById(int id){
         return subjectService.findById(id);
     }
         
@@ -27,7 +27,7 @@ public class SubjectController {
     }
         
 
-    Page<Subject> findAll(Pageable pageable){
+    List<Subject> findAll(Pageable pageable){
         return subjectService.findAll(pageable);
     }
         
