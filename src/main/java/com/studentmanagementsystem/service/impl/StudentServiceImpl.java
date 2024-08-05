@@ -19,49 +19,104 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    /*
+    *
+    * Student by I'd
+    *
+    * */
     @Override
     public Student findById(int id) {
         return studentRepository.findById(id);
     }
 
+    /*
+    *
+    * Save Student
+    *
+    * */
+    @Override
+    public Student save(Student student) {
+        return studentRepository.save(student);
+    }
+
+    /*
+    *
+    * Student by Email I'd
+    *
+    * */
     @Override
     public Student findByEmailContaining(String email) {
         return studentRepository.findByEmailContaining(email);
     }
 
+    /*
+    *
+    * Student by Email I'd and School
+    *
+    * */
     @Override
     public Student findByEmailContaining(String email, int schoolId) {
         return studentRepository.findByEmailContaining(email, schoolId);
     }
 
+    /*
+    *
+    * Student by Phone Number
+    *
+    * */
     @Override
     public List<Student> findByPhoneNumber(String mobile) {
         return studentRepository.findByPhoneNumber(mobile);
     }
 
+    /*
+    *
+    * Student List by First Name
+    *
+    * */
     @Override
     public List<Student> findByFirstNameContaining(String firstName) {
         return studentRepository.findByFirstNameContaining(firstName);
     }
 
+    /*
+    *
+    * Student List by Middle Name
+    *
+    * */
     @Override
     public List<Student> findByMiddleNameContaining(String middleName) {
         return studentRepository.findByMiddleNameContaining(middleName);
     }
 
+    /*
+    *
+    * Student List by Last Name
+    *
+    * */
     @Override
     public List<Student> findByLastNameContaining(String lastName) {
         return studentRepository.findByLastNameContaining(lastName);
     }
 
+    /*
+    *
+    * Student List by First, Middle and Last Name
+    *
+    * */
     @Override
     public List<Student> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(String firstName, String middleName, String lastName, String email) {
         return studentRepository.findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(firstName, middleName, lastName, email);
     }
 
+    /*
+    *
+    * Student List by Pagination
+    *
+    * */
     @Override
-    public Page<Student> findAll(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+    public List<Student> findAll(Pageable pageable) {
+        return studentRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -69,7 +124,11 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.deleteById(id);
     }
 
-    @PostConstruct
+    /*
+    *
+    * Add Dummy Data
+    *
+    * */
     public void init(){
         if(studentRepository.count()==0){
             for (int i = 1; i <= 10000; i++) {
