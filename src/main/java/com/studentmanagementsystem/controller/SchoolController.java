@@ -125,4 +125,5 @@ public class SchoolController {
     public List<School> findByDetailsContaining(@PathVariable(value = "details") String details){
         return schoolService.findByDetailsContaining(details);
     }
+
 }
