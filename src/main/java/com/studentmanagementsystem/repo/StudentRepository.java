@@ -15,6 +15,8 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     Student findById(int id);
 
+    Student save(Student student);
+
     Student findByEmailContaining(String email);
 
     @Query(
