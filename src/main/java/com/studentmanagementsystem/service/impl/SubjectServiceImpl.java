@@ -19,27 +19,61 @@ public class SubjectServiceImpl implements SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    /*
+    *
+    * Subject by I'd
+    *
+    * */
     @Override
-    public Student findById(int id) {
+    public Subject findById(int id) {
         return subjectRepository.findById(id);
     }
 
+    /*
+    *
+    * Add Subject
+    *
+    * */
+    @Override
+    public Subject save(Subject subject) {
+        return subjectRepository.save(subject);
+    }
+
+    /*
+    *
+    * Subject List by Name
+    *
+    * */
     @Override
     public List<Subject> findByNameContaining(String name) {
         return subjectRepository.findByNameContaining(name);
     }
 
+    /*
+    *
+    * Subject List by Pagination
+    *
+    * */
     @Override
-    public Page<Subject> findAll(Pageable pageable) {
-        return subjectRepository.findAll(pageable);
+    public List<Subject> findAll(Pageable pageable) {
+        return subjectRepository.findAll(pageable).getContent();
     }
 
+    /*
+    *
+    * Subject List by Name Pagination
+    *
+    * */
     @Override
     public Page<Student> findAllByName(Pageable pageable, String name) {
         return subjectRepository.findAllByName(pageable, name);
     }
 
-    @PostConstruct
+    /*
+    *
+    * Add Dummy Data
+    *
+    * */
     public void init() {
         if (subjectRepository.count() == 0) {
             for (int i = 1; i <= 100000; i++) {
