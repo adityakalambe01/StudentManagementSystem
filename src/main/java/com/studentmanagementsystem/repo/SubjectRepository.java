@@ -13,7 +13,9 @@ import java.util.List;
 @Repository
 @NonNullApi
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
-    Student findById(int id);
+    Subject save(Subject subject);
+
+    Subject findById(int id);
 
     List<Subject> findByNameContaining(String name);
 
