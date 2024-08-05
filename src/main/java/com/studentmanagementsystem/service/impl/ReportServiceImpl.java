@@ -20,42 +20,91 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     private ReportRepository reportRepository;
 
+    /*
+    *
+    * Report List by Pagination
+    *
+    * */
     @Override
-    public Page<Report> findAll(Pageable pageable) {
-        return reportRepository.findAll(pageable);
+    public List<Report> findAll(Pageable pageable) {
+        return reportRepository.findAll(pageable).getContent();
     }
 
+    /*
+    *
+    * Add New Report
+    *
+    * */
+    @Override
+    public Report save(Report report) {
+        return reportRepository.save(report);
+    }
+
+    /*
+    *
+    * Report by I'd
+    *
+    * */
     @Override
     public Report findById(int id) {
         return reportRepository.findById(id);
     }
 
+    /*
+    *
+    * Delete Report by I'd
+    *
+    * */
     @Override
     public Report deleteById(int id) {
         return reportRepository.deleteById(id);
     }
 
+    /*
+    *
+    * Report by Date Created
+    *
+    * */
     @Override
     public List<Report> findByDateCreated(Date created) {
         return reportRepository.findByDateCreated(created);
     }
 
+    /*
+    *
+    * Report by Content
+    *
+    * */
     @Override
     public List<Report> findByContentContaining(String content) {
         return reportRepository.findByContentContaining(content);
     }
 
+    /*
+    *
+    * Report by Teacher Comment
+    *
+    * */
     @Override
     public List<Report> findByTeacherCommentContaining(String comment) {
         return reportRepository.findByTeacherCommentContaining(comment);
     }
 
+    /*
+    *
+    * Find by Student Is
+    *
+    * */
     @Override
     public List<Report> findByStudent(Student student) {
         return reportRepository.findByStudent(student);
     }
 
-    @PostConstruct
+    /*
+    *
+    * Add Dummy Data
+    *
+    * */
     public void init() {
         if (reportRepository.count() == 0) {
             for (int i = 1; i <= 100; i++) {
