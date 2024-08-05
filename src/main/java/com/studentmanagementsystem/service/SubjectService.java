@@ -8,11 +8,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface SubjectService {
-    Student findById(int id);
+    Subject findById(int id);
+
+    Subject save(Subject subject);
 
     List<Subject> findByNameContaining(String name);
 
-    Page<Subject> findAll(Pageable pageable);
+    List<Subject> findAll(Pageable pageable);
 
     Page<Student> findAllByName(Pageable pageable, String name);
 }
