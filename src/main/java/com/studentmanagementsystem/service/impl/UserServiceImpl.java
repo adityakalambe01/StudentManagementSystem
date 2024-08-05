@@ -1,6 +1,5 @@
 package com.studentmanagementsystem.service.impl;
 
-import com.studentmanagementsystem.entity.School;
 import com.studentmanagementsystem.entity.Users;
 import com.studentmanagementsystem.repo.UserRepository;
 import com.studentmanagementsystem.service.UserService;
@@ -21,6 +20,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /*
+    *
+    * Get User Role
+    *
+    * */
     private String getRole(Users users){
         String role = "NA";
         if (users.getIsSuperAdminAccess()){
@@ -39,6 +43,11 @@ public class UserServiceImpl implements UserService {
         return role;
     }
 
+    /*
+    *
+    * Save User
+    *
+    * */
     @Override
     public Users save(Users users) {
         if (users.getUserId()==null){
@@ -50,6 +59,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(users);
     }
 
+    /*
+    *
+    * Update User
+    *
+    * */
     @Override
     public Users update(Users users) {
         Users dbUser = findByUserId(users.getUserId());
@@ -102,86 +116,171 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(users);
     }
 
+    /*
+    *
+    * User by Email I'd
+    *
+    * */
     @Override
     public Users findByEmailId(String email) {
         return userRepository.findByEmailId(email);
     }
 
+    /*
+    *
+    * Users List by Pagination
+    *
+    * */
     @Override
     public Page<Users> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
+    /*
+    *
+    * Users List by Role
+    *
+    * */
     @Override
     public List<Users> findByRole(String role, Pageable pageable) {
         return userRepository.findByRole(role, pageable);
     }
 
+    /*
+    *
+    * Users List
+    *
+    * */
     @Override
     public List<Users> findAll() {
         return userRepository.findAll();
     }
 
+    /*
+    *
+    * Users List by First Name
+    *
+    * */
     @Override
     public List<Users> findByFirstNameContaining(String firstName, Pageable pageable) {
         return userRepository.findByFirstNameContaining(firstName, pageable);
     }
 
+    /*
+    *
+    * Users List by Middle Name
+    *
+    * */
     @Override
     public List<Users> findByMiddleNameContaining(String middleName, Pageable pageable) {
         return userRepository.findByMiddleNameContaining(middleName, pageable);
     }
 
+    /*
+    *
+    * Users List by Last Name
+    *
+    * */
     @Override
     public List<Users> findByLastNameContaining(String lastName, Pageable pageable) {
         return userRepository.findByLastNameContaining(lastName, pageable);
     }
 
+    /*
+    *
+    * Users List by First, Middle and Last Name
+    *
+    * */
     @Override
     public List<Users> findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(String firstName, String middleName, String lastName, Pageable pageable) {
         return userRepository.findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(firstName, middleName, lastName, pageable);
     }
 
+    /*
+    *
+    * Users List by Phone Number
+    *
+    * */
     @Override
     public List<Users> findByPhoneNumberContaining(String phoneNumber, Pageable pageable) {
         return userRepository.findByPhoneNumberContaining(phoneNumber, pageable);
     }
 
+    /*
+    *
+    * Users List of Super Admin Access
+    *
+    * */
     @Override
     public List<Users> findByIdSuperAdminAccess(boolean isSuperAdmin, Pageable pageable) {
         return userRepository.findByIdSuperAdminAccess(isSuperAdmin, pageable);
     }
 
+    /*
+    *
+    * Users List of Admin Access
+    *
+    * */
     @Override
     public List<Users> findByIsAdminAccess(boolean isAdmin, Pageable pageable) {
         return userRepository.findByIsAdminAccess(isAdmin, pageable);
     }
 
+    /*
+    *
+    * Users List by Principle Access
+    *
+    * */
     @Override
     public List<Users> findByIsPrincipleAccess(boolean isPrinciple, Pageable pageable) {
         return userRepository.findByIsPrincipleAccess(isPrinciple, pageable);
     }
 
+    /*
+    *
+    * Users List by Teacher Access
+    *
+    * */
     @Override
     public List<Users> findByIsTeacherAccess(boolean isTeacher, Pageable pageable) {
         return userRepository.findByIsTeacherAccess(isTeacher, pageable);
     }
 
+    /*
+    *
+    * Users List by Student Access
+    *
+    * */
     @Override
     public List<Users> findByIsStudentAccess(boolean isStudent, Pageable pageable) {
         return userRepository.findByIsStudentAccess(isStudent, pageable);
     }
 
+    /*
+    *
+    * Users List by Parent Access
+    *
+    * */
     @Override
     public List<Users> findByIsParentAccess(boolean isParent, Pageable pageable) {
         return userRepository.findByIsParentAccess(isParent, pageable);
     }
 
+    /*
+    *
+    * User by I'd
+    *
+    * */
     @Override
     public Users findByUserId(String id) {
         return userRepository.findByUserId(id);
     }
 
+    /*
+    *
+    * User Login Logic
+    *
+    * */
     @Override
     public Boolean login(Users users) {
         Users dbUser = findByEmailId(users.getEmailId());
@@ -196,6 +295,11 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /*
+    *
+    * User Logout Logic
+    *
+    * */
     @Override
     public Boolean logout(Users users) {
         Users dbUser = findByEmailId(users.getEmailId());
@@ -207,6 +311,11 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /*
+    *
+    * Authorization Data
+    *
+    * */
     public Map<String, Object> authData(Users users){
         Users dbUser;
         Map<String, Object> auth = new HashMap<>();
