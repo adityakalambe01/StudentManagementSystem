@@ -52,7 +52,7 @@ public class StudentController {
         return studentService.findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(firstName, middleName, lastName, email);
     }
 
-    public Page<Student> findAll(Pageable pageable){
+    public List<Student> findAll(Pageable pageable){
         return studentService.findAll(pageable);
     }
 
