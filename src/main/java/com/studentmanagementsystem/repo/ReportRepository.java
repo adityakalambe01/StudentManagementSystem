@@ -16,6 +16,8 @@ import java.util.List;
 public interface ReportRepository extends JpaRepository<Report, Integer> {
     Page<Report> findAll(Pageable pageable);
 
+    Report save(Report report);
+
     Report findById(int id);
 
     Report deleteById(int id);
