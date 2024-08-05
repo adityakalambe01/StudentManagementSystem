@@ -17,12 +17,12 @@ public class HomeworkController{
     private HomeworkService service;
 
     @PostMapping
-    public Classroom save(@RequestBody Classroom classroom) {
-        return service.save(classroom);
+    public Homework save(@RequestBody Homework homework) {
+        return service.save(homework);
     }
 
     @GetMapping("/{id}")
-    public Classroom findById(@PathVariable("id") int id) {
+    public Homework findById(@PathVariable("id") int id) {
         return service.findById(id);
     }
 
