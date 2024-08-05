@@ -57,4 +57,5 @@ public class ParentController {
     public List<Parent> findByFirstNameAndMiddleNameAndLastNameContaining(@PathVariable("firstName") String firstName,@PathVariable("middleName") String middleName,@PathVariable("lastName") String lastName){
         return parentService.findByFirstNameAndMiddleNameAndLastNameContaining(firstName, middleName, lastName);
     }
+
 }
