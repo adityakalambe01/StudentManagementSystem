@@ -2,7 +2,6 @@ package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.entity.School;
 import com.studentmanagementsystem.service.SchoolService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +46,7 @@ public class SchoolController {
 
     /*
     *
-    * School by Id
+    * School by I'd
     *
     * */
     @GetMapping(value = "/{id}")
@@ -60,7 +59,7 @@ public class SchoolController {
     * Save School
     *
     * */
-    @PostConstruct
+    @PostMapping
     public School save(@RequestBody School school){
         return schoolService.save(school);
     }
