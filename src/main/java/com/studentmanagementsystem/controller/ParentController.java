@@ -19,7 +19,7 @@ public class ParentController {
     private ParentService parentService;
 
     @GetMapping
-    public Page<Parent> findAll(Pageable pageable){
+    public List<Parent> findAll(Pageable pageable){
         return parentService.findAll(pageable);
     }
 
