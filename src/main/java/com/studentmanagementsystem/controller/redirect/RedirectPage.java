@@ -1,14 +1,17 @@
 package com.studentmanagementsystem.controller.redirect;
 
 import com.studentmanagementsystem.controller.*;
+import com.studentmanagementsystem.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RedirectPage {
 
     @Autowired
-    private AddressController addressController;
+    private AddressService addressController;
 
     @Autowired
     private ClassroomController classroomController;
@@ -73,6 +76,7 @@ public class RedirectPage {
     private static String adminTeacherPage = "teacher";
 
 
+    @GetMapping(value = {"", "/", "index", "homepage"})
     public String indexPage(){
         return homePage;
     }
