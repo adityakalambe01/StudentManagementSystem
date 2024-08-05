@@ -18,7 +18,7 @@ public class ReportController {
     private ReportService reportService;
 
     @GetMapping
-    public Page<Report> findAll(Pageable pageable){
+    public List<Report> findAll(Pageable pageable){
         return reportService.findAll(pageable);
     }
 
