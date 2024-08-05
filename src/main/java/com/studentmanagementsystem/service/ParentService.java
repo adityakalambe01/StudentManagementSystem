@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ParentService {
-    Page<Parent> findAll(Pageable pageable);
+    List<Parent> findAll(Pageable pageable);
+
+    Parent save(Parent parent);
 
     Parent findById(int id);
 
