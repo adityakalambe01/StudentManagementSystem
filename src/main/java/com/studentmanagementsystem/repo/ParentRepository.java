@@ -14,6 +14,8 @@ import java.util.List;
 public interface ParentRepository extends JpaRepository<Parent, Integer> {
     Page<Parent> findAll(Pageable pageable);
 
+    Parent save(Parent parent);
+
     Parent findById(int id);
 
     List<Parent> findByFirstNameContaining(String name);
