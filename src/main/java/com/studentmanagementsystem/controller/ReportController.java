@@ -51,4 +51,5 @@ public class ReportController {
     public List<Report> findByStudent(@PathVariable(value = "student") Student student){
         return reportService.findByStudent(student);
     }
+
 }
