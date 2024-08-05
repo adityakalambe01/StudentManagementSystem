@@ -9,7 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface ReportService {
-    Page<Report> findAll(Pageable pageable);
+    List<Report> findAll(Pageable pageable);
+
+    Report save(Report report);
 
     Report findById(int id);
 
