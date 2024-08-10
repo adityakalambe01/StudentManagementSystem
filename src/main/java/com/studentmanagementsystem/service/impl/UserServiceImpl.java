@@ -43,6 +43,16 @@ public class UserServiceImpl implements UserService {
         return role;
     }
 
+    private Users setUserAccess(Users users,boolean value){
+        users.setIsSuperAdminAccess(value);
+        users.setIsAdminAccess(value);
+        users.setIsPrincipleAccess(value);
+        users.setIsTeacherAccess(value);
+        users.setIsStudentAccess(value);
+        users.setIsParentAccess(value);
+        return users;
+    }
+
     /*
     *
     * Save User
@@ -50,12 +60,21 @@ public class UserServiceImpl implements UserService {
     * */
     @Override
     public Users save(Users users) {
+
+        if (userRepository.findByUserId(users.getEmailId()) != null) {
+            return null;
+        }
+
         if (users.getUserId()==null){
             users.setUserId(UUID.randomUUID().toString());
         }
 
+        if (userRepository.count()==0){
+            users = setUserAccess(users,true);
+        }else {
+            users = setUserAccess(users,false);
+        }
         users.setRole(getRole(users));
-
         return userRepository.save(users);
     }
 
