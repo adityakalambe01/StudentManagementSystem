@@ -1,11 +1,12 @@
 package com.studentmanagementsystem.controller.redirect;
 
 import com.studentmanagementsystem.controller.*;
+import com.studentmanagementsystem.entity.Users;
 import com.studentmanagementsystem.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RedirectPage {
@@ -42,43 +43,90 @@ public class RedirectPage {
     * Pages redirect
     *
     * */
+    //Login
+    private String loginPage = "auth/login/index";
+
+    //Sign up
+    private String signUpPage = "auth/signup/index";
 
     //indexPage
-    private static String homePage = "index";
+    private String homePage = "index";
 
     //Admin Dashboard Page
-    private static String adminDashboardPage = "dashboard";
+    private String adminDashboardPage = "dashboard";
+
     //Address Page
-    private static String adminAddressPage = "address";
+    private String adminAddressPage = "address";
 
     //Class Room Page
-    private static String adminClassroomPage = "classroom";
+    private String adminClassroomPage = "classroom";
 
     //Homework Page
-    private static String adminHomeworkPage = "homework";
+    private String adminHomeworkPage = "homework";
 
     //Parent Page
-    private static String adminParentPage = "parent";
+    private String adminParentPage = "parent";
 
     //Report Page
-    private static String adminReportPage = "report";
+    private String adminReportPage = "report";
 
     //Admin School
-    private static String adminSchoolPage = "school";
+    private String adminSchoolPage = "school";
 
     //Student Page
-    private static String adminStudentPage = "student";
+    private String adminStudentPage = "student";
 
     //Subject Page
-    private static String adminSubjectPage = "subject";
+    private String adminSubjectPage = "subject";
 
     //Teacher Page
-    private static String adminTeacherPage = "teacher";
+    private String adminTeacherPage = "teacher";
+    @Autowired
+    private UserController userController;
 
 
     @GetMapping(value = {"", "/", "index", "homepage"})
-    public String indexPage(){
+    public String indexPage(Model model){
+        model.addAttribute("FaceBook","");
+        model.addAttribute("Instagram","https://www.instagram.com/adityakalambe01/");
+        model.addAttribute("LinkedIn","https://www.linkedin.com/in/adityakalambe/");
+        model.addAttribute("GitHub","https://github.com/adityakalambe01/StudentManagementSystem");
+        model.addAttribute("MailId","mailto:adityakalambe20@gmail.com");
+
+        model.addAttribute("copyright","@ 2024 Student Management System. All rights reserved.");
         return homePage;
+    }
+
+    @GetMapping("/login-page")
+    public String loginPage(
+            @RequestParam(required = false, defaultValue = "user", value = "role") String role,
+            Model model
+    ){
+        model.addAttribute("roleSignInMessage",
+                ((char)(role.charAt(0)-32))+role.substring(1)+"'s"+" Sign In");
+        return loginPage;
+    }
+
+    @GetMapping("/sign-up-page")
+    public String signUpPage(){
+        return signUpPage;
+    }
+
+    @PostMapping("/create-new-user")
+    public String signUpUser( Users users, String confirm_password, Model model){
+        if (users.getPassword().equals(confirm_password)){
+            if (userController.save(users) != null)
+                return loginPage;
+            System.out.println(users.getEmailId()+" is already exists!");
+        }
+        model.addAttribute("firstName",users.getFirstName());
+        model.addAttribute("middleName",users.getMiddleName());
+        model.addAttribute("lastName",users.getLastName());
+        model.addAttribute("emailId", users.getEmailId());
+        model.addAttribute("phoneNumber", users.getPhoneNumber());
+        System.out.println(users);
+
+        return signUpPage;
     }
 
     /*
