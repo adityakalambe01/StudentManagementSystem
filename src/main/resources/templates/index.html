@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -307,111 +307,126 @@
             background-color: #cc5200;
         }
 
-        /* Footer Styles */
-        .footer {
+
+        .content {
+            /*padding: 20px;*/
+        }
+
+        footer {
             background-color: #333;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
 
         .footer-container {
             display: flex;
-            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        .footer-map {
-            width: 50%;
-            height: 600px; /* Adjust height as needed */
-            overflow: hidden;
-            padding: 35px;
-            border-radius: 50px;
-        }
-
-        .footer-map iframe {
-            width: 100%;
-            height: 100%;
-            padding: 50px;
-        }
-
-        .footer-info {
-            display: flex;
-            width: 50%;
-            padding: 50px;
-        }
-
-
-        .footer-address-social,
-        .footer-login {
-            margin-top: 20px;
-            /*margin-bottom: 20px;*/
-        }
-
-        .footer-address-social h3,
-        .footer-login h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .footer-address-social p {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: row;
-            /*flex-direction: column;*/
-        }
-
-        .social-links a {
-            color: #fff;
-            text-decoration: none;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
+        .footer-section {
+            flex: 1;
             padding: 10px;
+            box-sizing: border-box;
         }
 
-        .social-links a:hover {
-            color: #ff6600;
-        }
-
-        .social-links i {
-            margin-right: 10px;
-        }
-
-        .footer-login h3{
-            margin-left: 50px;
-        }
-        .footer-login ul {
-            list-style: none;
-            /*padding: 50px;*/
-        }
-
-        .footer-login ul li {
+        .footer-section h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
             margin-bottom: 10px;
         }
 
-        .footer-login ul a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-            padding: 50px;
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
         }
 
-        .footer-login ul a:hover {
-            color: #ff6600;
+        .contact-form label {
+            margin-top: 10px;
         }
 
-        .footer-bottom {
+        .contact-form input, .contact-form textarea {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .contact-form button {
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .map-address {
+            /*background-color: #444;*/
+            color: #ddd;
+        }
+
+        .map iframe {
             width: 100%;
-            background-color: #222;
+            height: 150px;
+            border: 0;
+        }
+
+        .our-links ul, .social-icons {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .our-links li, .social-icons li {
+            margin-bottom: 10px;
+        }
+
+        .our-links a, .social-icons a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #555;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #4CAF50;
+            transform: scale(1.1);
+        }
+
+        .social-icon i {
+            transition: color 0.3s;
+        }
+
+        .footer-copyright {
             text-align: center;
-            padding: 20px;
-            color: #fff;
-            font-size: 1em;
+            padding: 10px 0;
+            background-color: #222;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-section {
+                flex: 1 1 100%;
+            }
+
+            .social-icons {
+                justify-content: space-between;
+            }
         }
 
 
@@ -441,12 +456,17 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="container">
-        <a href="#" class="logo">Student Management System</a>
+        <a href="/homepage" class="logo">Student Management System</a>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li>
+                <a href="login-page">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -458,7 +478,7 @@
         <div class="container">
             <h1>Welcome to the Student Management System</h1>
             <p>Manage your school's students, teachers, and more with ease.</p>
-            <a href="#" class="btn-primary">Get Started</a>
+            <a href="/sign-up-page" class="btn-primary">Get Started</a>
         </div>
     </section>
 
@@ -545,91 +565,148 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2>Features</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <h3>Student Management</h3>
-                    <p>Effortlessly manage student profiles, including academic records, attendance, and more.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Teacher Management</h3>
-                    <p>Manage teacher profiles, their schedules, and classroom assignments with ease.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Classroom Management</h3>
-                    <p>Assign students and teachers to classrooms and manage classroom resources.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Homework Tracking</h3>
-                    <p>Assign and track homework assignments, submission statuses, and grades.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Parent Portal</h3>
-                    <p>Allow parents to monitor their child's progress, attendance, and homework.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>School Administration</h3>
-                    <p>Manage school-wide settings, subjects, and report generation effortlessly.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!--    <section id="features" class="features-section">-->
+<!--        <div class="container">-->
+<!--            <h2>Features</h2>-->
+<!--            <div class="features-grid">-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>Student Management</h3>-->
+<!--                    <p>Effortlessly manage student profiles, including academic records, attendance, and more.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>Teacher Management</h3>-->
+<!--                    <p>Manage teacher profiles, their schedules, and classroom assignments with ease.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>Classroom Management</h3>-->
+<!--                    <p>Assign students and teachers to classrooms and manage classroom resources.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>Homework Tracking</h3>-->
+<!--                    <p>Assign and track homework assignments, submission statuses, and grades.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>Parent Portal</h3>-->
+<!--                    <p>Allow parents to monitor their child's progress, attendance, and homework.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-item">-->
+<!--                    <h3>School Administration</h3>-->
+<!--                    <p>Manage school-wide settings, subjects, and report generation effortlessly.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or need support, feel free to reach out to us.</p>
-            <a href="mailto:adityakalambe20@gmail.com" class="btn-secondary">Contact Support</a>
-        </div>
-    </section>
+<!--    <section id="contact" class="contact-section">-->
+<!--        <div class="container">-->
+<!--            <h2>Contact Us</h2>-->
+<!--            <p>If you have any questions or need support, feel free to reach out to us.</p>-->
+<!--            <a href="mailto:adityakalambe20@gmail.com" class="btn-secondary">Contact Support</a>-->
+<!--        </div>-->
+<!--    </section>-->
 </div>
 
-<!-- Footer -->
-<footer class="footer">
+
+<!-- Footer Section -->
+<footer>
     <div class="footer-container">
-        <div class="footer-map">
-            <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8752240892774!2d73.7883093144182!3d18.510153287150368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c2272d12b3c1%3A0x3b1cf69f4343f9db!2sKarve%20Nagar%2C%20Pune%2C%20Maharashtra%20441152!5e0!3m2!1sen!2sin!4v1613412861307!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    frameborder="0"
-                    style="border:0;"
-                    allowfullscreen=""
-                    aria-hidden="false"
-                    tabindex="0">
-            </iframe>
+        <!-- Section 1: Contact Us Form -->
+        <div class="footer-section contact-form">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
-        <div class="footer-info">
-            <div class="footer-address-social">
-                <h3>Our Office</h3>
-                <p>Karve Nagar, Pune, Maharashtra, India</p>
-                <p>Email: kalambeaditya500@gmail.com</p>
-                <p>Phone: +123 456 7890</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i> </a>
-                    <a href="#"><i class="fab fa-instagram"></i> </a>
-                    <a href="https://github.com/adityakalambe01/StudentManagementSystem"><i class="fab fa-github"></i> </a>
-                    <a href="mailto:adityakalambe20@gmail.com"><i class="fas fa-envelope"></i> </a>
-                </div>
+
+        <!-- Section 2: Map and Address -->
+        <div class="footer-section map-address">
+            <h2>Find Us</h2>
+            <div class="map">
+                <!-- Embedded Google Map -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.3680864295313!2d73.8299986757319!3d18.487873277949347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfad4b1f1ffb%3A0xc8b5a26dd9cb872d!2sHingne%20Home%20Colony%2C%20Karve%20Nagar%2C%20Pune%2C%20Maharashtra%20411052%2C%20India!5e0!3m2!1sen!2sus!4v1691653587657!5m2!1sen!2sus" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="footer-login">
-                <h3>Login Links</h3>
-                <ul>
-                    <li><a href="#">Admin Login</a></li>
-                    <li><a href="#">Principal Login</a></li>
-                    <li><a href="#">Teacher Login</a></li>
-                    <li><a href="#">Student Login</a></li>
-                    <li><a href="#">Parent Login</a></li>
-                </ul>
-            </div>
+
+            <table>
+                <tr>
+                    <th>
+                        <p style="margin-top: -40px; text-align: left;">Address</p>
+                    </th>
+                    <th style="text-align: justify;">
+                        <p style=" word-spacing: 15px;">S.No. 45/1,
+                            Plot No. 32, <br>
+                            Near ABC Supermarket, <br>
+                            Pune, Maharashtra, 411052, <br>
+                            India</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <p style="text-align: left">
+                            Phone No
+                        </p>
+                    </th>
+                    <th>
+                        <p style="text-align: justify; word-spacing: 15px">
+                            +91 123-456-7890
+                        </p>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <p style="text-align: justify; word-spacing: 15px">
+                            Email Id
+                        </p>
+                    </th>
+                    <th>
+                        <p>
+                            kalambeaditya500@gmail.com
+                        </p>
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 3: Our Links -->
+        <div class="footer-section our-links">
+            <h2>Login Links</h2>
+            <ul>
+                <li ><a href="login-page?role=admin" class="btn-secondary">Admin Login</a></li>
+                <li><a href="login-page?role=principle" class="btn-secondary">Principal Login</a></li>
+                <li><a href="login-page?role=teacher" class="btn-secondary">Teacher Login</a></li>
+                <li><a href="login-page?role=student" class="btn-secondary">Student Login</a></li>
+                <li><a href="login-page?role=parent" class="btn-secondary">Parent Login</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 4: Circular Social Links -->
+        <div class="footer-section social-links">
+            <h2>Follow Us</h2>
+            <ul class="social-icons">
+                <li><a th:href="${FaceBook}" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a th:href="${Instagram}" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a th:href="${LinkedIn}" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a th:href="${GitHub}" class="social-icon"><i class="fab fa-github"></i></a></li>
+                <li><a th:href="${MailId}" class="social-icon"><i class="fas fa-envelope"></i></a></li>
+            </ul>
         </div>
     </div>
-    <div class="footer-bottom">
-        <p>&copy; 2024 Student Management System. All rights reserved.</p>
+
+    <!-- Section 5: Copyright -->
+    <div class="footer-copyright">
+        <p th:text="${copyright}"></p>
     </div>
 </footer>
 </body>
 </html>
+
+
