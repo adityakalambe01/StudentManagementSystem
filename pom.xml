@@ -99,6 +99,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>StudentManagementSystem</finalName>
     </build>
 
 </project>
