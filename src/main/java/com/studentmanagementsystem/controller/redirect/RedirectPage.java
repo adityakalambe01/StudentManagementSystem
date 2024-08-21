@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 @Controller
 public class RedirectPage {
 
@@ -53,7 +56,7 @@ public class RedirectPage {
     private String homePage = "index";
 
     //Admin Dashboard Page
-    private String adminDashboardPage = "dashboard";
+    private String adminDashboardPage = "dashboard/admin";
 
     //Address Page
     private String adminAddressPage = "address";
@@ -93,7 +96,7 @@ public class RedirectPage {
         model.addAttribute("GitHub","https://github.com/adityakalambe01/StudentManagementSystem");
         model.addAttribute("MailId","mailto:adityakalambe20@gmail.com");
 
-        model.addAttribute("copyright","@ 2024 Student Management System. All rights reserved.");
+        model.addAttribute("copyright","@ "+LocalDate.now().getYear()+" Student Management System. All rights reserved.");
         return homePage;
     }
 
@@ -127,6 +130,26 @@ public class RedirectPage {
         System.out.println(users);
 
         return signUpPage;
+    }
+
+    @PostMapping(value = "/user-sign-in")
+    public String userSignIn(Users users, Model model){
+        Map<String, Object> user = userController.login(users);
+        if ( user!= null){
+            return homePage;
+        }
+        return loginPage;
+    }
+
+    @GetMapping("welcome")
+    public String welcome(Model model){
+
+        return "welcome";
+    }
+
+    @GetMapping(value = "admin-dashboard")
+    public String adminDashboard(Model model){
+        return adminDashboardPage;
     }
 
     /*
@@ -184,4 +207,8 @@ public class RedirectPage {
     *
     * */
 
+    @GetMapping("test")
+    public String test(Model model){
+        return "xxx";
+    }
 }
