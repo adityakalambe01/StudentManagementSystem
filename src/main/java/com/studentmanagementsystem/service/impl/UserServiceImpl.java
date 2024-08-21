@@ -152,8 +152,8 @@ public class UserServiceImpl implements UserService {
     *
     * */
     @Override
-    public Page<Users> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public List<Users> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).getContent();
     }
 
     /*
@@ -164,16 +164,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Users> findByRole(String role, Pageable pageable) {
         return userRepository.findByRole(role, pageable);
-    }
-
-    /*
-    *
-    * Users List
-    *
-    * */
-    @Override
-    public List<Users> findAll() {
-        return userRepository.findAll();
     }
 
     /*
