@@ -5,9 +5,9 @@ import com.studentmanagementsystem.entity.Subject;
 import com.studentmanagementsystem.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +22,8 @@ public class SubjectController {
     * Get Subject by ID
     *
     * */
-    Subject findById(int id){
+    @GetMapping(value = "/{id}")
+    public Subject findById(@PathVariable("id") int id){
         return subjectService.findById(id);
     }
         
@@ -31,7 +32,8 @@ public class SubjectController {
     * Get Subject by Name
     *
     * */
-    List<Subject> findByNameContaining(String name){
+    @GetMapping(value = "/student-name-{name}")
+    public List<Subject> findByNameContaining(@PathVariable("name") String name){
         return subjectService.findByNameContaining(name);
     }
 
@@ -40,8 +42,12 @@ public class SubjectController {
     * Get All Subject's
     *
     * */
-    List<Subject> findAll(Pageable pageable){
-        return subjectService.findAll(pageable);
+    @GetMapping
+    public List<Subject> findAll(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ){
+        return subjectService.findAll(PageRequest.of(pageNumber,pageSize));
     }
 
     /*
@@ -49,8 +55,13 @@ public class SubjectController {
     * Get All Student's by Name
     *
     * */
-    Page<Student> findAllByName(Pageable pageable, String name){
-        return subjectService.findAllByName(pageable,name);
+    @GetMapping(value = "/name-{name}")
+    public List<Student> findAllByName(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize,
+            @PathVariable("name") String name
+    ){
+        return subjectService.findAllByName(PageRequest.of(pageNumber, pageSize),name);
     }
         
 }
