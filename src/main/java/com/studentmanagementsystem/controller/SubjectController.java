@@ -17,21 +17,38 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
+    /*
+    *
+    * Get Subject by ID
+    *
+    * */
     Subject findById(int id){
         return subjectService.findById(id);
     }
         
-
+    /*
+    *
+    * Get Subject by Name
+    *
+    * */
     List<Subject> findByNameContaining(String name){
         return subjectService.findByNameContaining(name);
     }
-        
 
+    /*
+    *
+    * Get All Subject's
+    *
+    * */
     List<Subject> findAll(Pageable pageable){
         return subjectService.findAll(pageable);
     }
-        
 
+    /*
+    *
+    * Get All Student's by Name
+    *
+    * */
     Page<Student> findAllByName(Pageable pageable, String name){
         return subjectService.findAllByName(pageable,name);
     }
