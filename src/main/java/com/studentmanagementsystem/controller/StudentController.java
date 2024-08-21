@@ -4,11 +4,9 @@ import com.studentmanagementsystem.entity.Student;
 import com.studentmanagementsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,8 +31,8 @@ public class StudentController {
     * Get Student by Email Contating
     *
     * */
-//    @GetMapping(value = "")
-    public Student findByEmailContaining(String email){
+    @GetMapping(value = "/email-{emailId}")
+    public Student findByEmailContaining(@PathVariable("emailId") String email){
         return studentService.findByEmailContaining(email);
     }
 
@@ -43,7 +41,8 @@ public class StudentController {
     * Get Student by Email and School
     *
     * */
-    public Student findByEmailContaining(String email, int schoolId){
+    @GetMapping(value = "/email-{emailId}-school-{schoolId}")
+    public Student findByEmailContaining(@PathVariable("emailId") String email, @PathVariable("schoolId") int schoolId){
         return studentService.findByEmailContaining(email, schoolId);
     }
 
@@ -52,7 +51,8 @@ public class StudentController {
     * Get Student by Phone-Number
     *
     * */
-    public List<Student> findByPhoneNumber(String mobile){
+    @GetMapping(value = "/phone-number-{mobile}")
+    public List<Student> findByPhoneNumber(@PathVariable("mobile") String mobile){
         return studentService.findByPhoneNumber(mobile);
     }
 
@@ -61,7 +61,8 @@ public class StudentController {
     * Get Student by First Name
     *
     * */
-    public List<Student> findByFirstNameContaining(String firstName){
+    @GetMapping("/first-name-{firstName}")
+    public List<Student> findByFirstNameContaining(@PathVariable("firstName") String firstName){
         return studentService.findByFirstNameContaining(firstName);
     }
 
@@ -70,7 +71,8 @@ public class StudentController {
     * Get Student by Middle Name
     *
     * */
-    public List<Student> findByMiddleNameContaining(String middleName){
+    @GetMapping(value = "/middle-name-{middleName}")
+    public List<Student> findByMiddleNameContaining(@PathVariable("middleName") String middleName){
         return studentService.findByMiddleNameContaining(middleName);
     }
 
@@ -79,7 +81,8 @@ public class StudentController {
     * Get Student by Last Name
     *
     * */
-    public List<Student> findByLastNameContaining(String lastName){
+    @GetMapping(value = "/last-name-{lastName}")
+    public List<Student> findByLastNameContaining(@PathVariable("lastName") String lastName){
         return studentService.findByLastNameContaining(lastName);
     }
 
@@ -88,7 +91,8 @@ public class StudentController {
     * Get Student by First-Name, Middle-Name and Last-Name
     *
     * */
-    public List<Student> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(String firstName, String middleName, String lastName, String email){
+    @GetMapping(value = "/first-name-{firstName}-middle-name-{middleName}-last-name-{lastName}-email-{email}")
+    public List<Student> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(@PathVariable("firstName") String firstName, @PathVariable("middleName") String middleName, @PathVariable("lastName") String lastName, @PathVariable("email") String email){
         return studentService.findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(firstName, middleName, lastName, email);
     }
 
@@ -97,8 +101,12 @@ public class StudentController {
     * Get All Students by Pagination
     *
     * */
-    public List<Student> findAll(Pageable pageable){
-        return studentService.findAll(pageable);
+    @GetMapping
+    public List<Student> findAll(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ){
+        return studentService.findAll(PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -106,7 +114,8 @@ public class StudentController {
     * Delete Student by ID
     *
     * */
-    public Student deleteById(int id){
+    @DeleteMapping(value = "/{id}")
+    public Student deleteById(@PathVariable("id") int id){
         return studentService.deleteById(id);
     }
 
@@ -115,7 +124,8 @@ public class StudentController {
     * Update Student by ID
     *
     * */
-    public Student updateStudent(Integer studentId, Student student){
+    @PutMapping(value = "/{studentId}")
+    public Student updateStudent(@PathVariable("studentId") Integer studentId, @RequestBody Student student){
         student.setId(studentId);
         return studentService.save(student);
     }
@@ -125,7 +135,8 @@ public class StudentController {
     * Add New Student
     *
     * */
-    public Student save(Student newStudent){
+    @PostMapping
+    public Student save(@RequestBody Student newStudent){
         return studentService.save(newStudent);
     }
 
