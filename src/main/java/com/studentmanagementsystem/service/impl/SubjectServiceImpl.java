@@ -65,8 +65,8 @@ public class SubjectServiceImpl implements SubjectService {
     *
     * */
     @Override
-    public Page<Student> findAllByName(Pageable pageable, String name) {
-        return subjectRepository.findAllByName(pageable, name);
+    public List<Student> findAllByName(Pageable pageable, String name) {
+        return subjectRepository.findAllByName(pageable, name).getContent();
     }
 
     /*
