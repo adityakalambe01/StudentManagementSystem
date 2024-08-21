@@ -4,7 +4,6 @@ import com.studentmanagementsystem.entity.Users;
 import com.studentmanagementsystem.repo.UserRepository;
 import com.studentmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
