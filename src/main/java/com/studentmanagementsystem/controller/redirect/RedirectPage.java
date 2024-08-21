@@ -1,6 +1,7 @@
 package com.studentmanagementsystem.controller.redirect;
 
 import com.studentmanagementsystem.controller.*;
+import com.studentmanagementsystem.entity.Address;
 import com.studentmanagementsystem.entity.Users;
 import com.studentmanagementsystem.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,11 +153,45 @@ public class RedirectPage {
         return adminDashboardPage;
     }
 
+    @GetMapping(value = "school-dashboard")
+    public String schoolDashboard(Model model){
+        return null;
+    }
+
+    @GetMapping(value = "teacher-dashboard")
+    public String teacherDashboard(Model model){
+        return null;
+    }
+
+    @GetMapping(value = "student-dashboard")
+    public String studentDashboard(Model model){
+        return null;
+    }
+
+
+
     /*
     *
     * Address
     *
     * */
+    public Address saveAddress(Address browserAddress){
+        return addressController.save(browserAddress);
+    }
+
+    public Address updateAddress(Integer id, Address updatedBrowserAddress){
+        return addressController.updateAddress(id, updatedBrowserAddress);
+    }
+
+    public Address deleteAddress(Integer id){
+        return addressController.deleteById(id);
+    }
+
+    public Address deleteAddress(Integer id, Address address){
+        return addressController.updateAddress(id, address);
+    }
+
+
 
 
     /*
