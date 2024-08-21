@@ -20,11 +20,11 @@ public interface UserService {
 
 //    Users findByEmailIdContaining(String emailId, Pageable pageable);
 
-    Page<Users> findAll(Pageable pageable);
+//    Page<Users> findAll(Pageable pageable);
 
     List<Users> findByRole(String role, Pageable pageable);
 
-    List<Users> findAll();
+    List<Users> findAll(Pageable pageable);
 
     List<Users> findByFirstNameContaining(String firstName, Pageable pageable);
 
