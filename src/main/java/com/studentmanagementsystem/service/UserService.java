@@ -1,10 +1,7 @@
 package com.studentmanagementsystem.service;
 
-import com.studentmanagementsystem.entity.School;
 import com.studentmanagementsystem.entity.Users;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
