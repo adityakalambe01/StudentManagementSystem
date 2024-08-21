@@ -16,5 +16,5 @@ public interface SubjectService {
 
     List<Subject> findAll(Pageable pageable);
 
-    Page<Student> findAllByName(Pageable pageable, String name);
+    List<Student> findAllByName(Pageable pageable, String name);
 }
