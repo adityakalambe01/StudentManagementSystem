@@ -3,7 +3,7 @@ package com.studentmanagementsystem.controller;
 import com.studentmanagementsystem.entity.Users;
 import com.studentmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "api/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -42,8 +43,12 @@ public class UserController {
     * Get List of User
     *
     * */
-    public Page<Users> findAll(Pageable pageable) {
-        return userService.findAll(pageable);
+    @GetMapping
+    public List<Users> findAll(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findAll(PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -51,17 +56,13 @@ public class UserController {
     * Get User List by Role
     *
     * */
-    public List<Users> findByRoleContaining(String role, Pageable pageable) {
-        return userService.findByRole(role, pageable);
-    }
-
-    /*
-    *
-    * Get List of User's by Pagination
-    *
-    * */
-    public List<Users> findAll() {
-        return userService.findAll();
+    @GetMapping(value = "/role-{role}")
+    public List<Users> findByRoleContaining(
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize,
+            @PathVariable("role") String role
+    ) {
+        return userService.findByRole(role, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -69,8 +70,13 @@ public class UserController {
     * Get User List by First-Name
     *
     * */
-    public List<Users> findByFirstNameContaining(String firstName, Pageable pageable) {
-        return userService.findByFirstNameContaining(firstName, pageable);
+    @GetMapping(value = "/first-name-{firstName}")
+    public List<Users> findByFirstNameContaining(
+            @PathVariable("firstName") String firstName,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByFirstNameContaining(firstName, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -78,8 +84,13 @@ public class UserController {
     * Get User List by Middle-Name
     *
     * */
-    public List<Users> findByMiddleNameContaining(String middleName, Pageable pageable) {
-        return userService.findByMiddleNameContaining(middleName, pageable);
+    @GetMapping(value = "/middle-name-{middleName}")
+    public List<Users> findByMiddleNameContaining(
+            @PathVariable("middleName") String middleName,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByMiddleNameContaining(middleName, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -87,8 +98,13 @@ public class UserController {
     * Get User List by Last-Name
     *
     * */
-    public List<Users> findByLastNameContaining(String lastName, Pageable pageable) {
-        return userService.findByLastNameContaining(lastName, pageable);
+    @GetMapping(value = "/last-name-{lastName}")
+    public List<Users> findByLastNameContaining(
+            @PathVariable("lastName") String lastName,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByLastNameContaining(lastName, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -96,8 +112,15 @@ public class UserController {
     * Get User List by First-Name, Middle-Name and Last-Name
     *
     * */
-    public List<Users> findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(String firstName, String middleName, String lastName, Pageable pageable) {
-        return userService.findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(firstName, middleName, lastName, pageable);
+    @GetMapping(value = "/first-name-{firstName}-middle-name-{middleName}-last-name{lastName}")
+    public List<Users> findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(
+            @PathVariable("firstName") String firstName,
+            @PathVariable("middleName") String middleName,
+            @PathVariable("lastName") String lastName,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByFirstNameContainingAndMiddleNameContainingAndLastNameContaining(firstName, middleName, lastName, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -105,8 +128,13 @@ public class UserController {
     * Get User List by Phone Number
     *
     * */
-    public List<Users> findByPhoneNumberContaining(String phoneNumber, Pageable pageable) {
-        return userService.findByPhoneNumberContaining(phoneNumber, pageable);
+    @GetMapping(value = "/phone-number-{phoneNumber}")
+    public List<Users> findByPhoneNumberContaining(
+            @PathVariable("phoneNumber") String phoneNumber,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByPhoneNumberContaining(phoneNumber, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -114,8 +142,13 @@ public class UserController {
     * Check User is Super Admin Access
     *
     * */
-    public List<Users> findByIdSuperAdmin(boolean isSuperAdmin, Pageable pageable) {
-        return userService.findByIdSuperAdminAccess(isSuperAdmin, pageable);
+    @GetMapping(value = "/super-admin-{value}")
+    public List<Users> findByIdSuperAdmin(
+            @PathVariable("value") boolean isSuperAdmin,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIdSuperAdminAccess(isSuperAdmin, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -123,8 +156,13 @@ public class UserController {
     * Check User is Admin Access
     *
     * */
-    public List<Users> findByIsAdmin(boolean isAdmin, Pageable pageable) {
-        return userService.findByIsAdminAccess(isAdmin, pageable);
+    @GetMapping(value = "/admin-{value}")
+    public List<Users> findByIsAdmin(
+            @PathVariable("value") boolean isAdmin,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIsAdminAccess(isAdmin, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -132,8 +170,13 @@ public class UserController {
     * Check User is Principle Access
     *
     * */
-    public List<Users> findByIsPrinciple(boolean isPrinciple, Pageable pageable) {
-        return userService.findByIsPrincipleAccess(isPrinciple, pageable);
+    @GetMapping(value = "/principle-{value}")
+    public List<Users> findByIsPrinciple(
+            @PathVariable("value") boolean isPrinciple,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIsPrincipleAccess(isPrinciple, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -141,8 +184,13 @@ public class UserController {
     * Check User is Teacher Access
     *
     * */
-    public List<Users> findByIsTeacher(boolean isTeacher, Pageable pageable) {
-        return userService.findByIsTeacherAccess(isTeacher, pageable);
+    @GetMapping(value = "/teacher-{value}")
+    public List<Users> findByIsTeacher(
+            @PathVariable("value") boolean isTeacher,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIsTeacherAccess(isTeacher, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -150,8 +198,13 @@ public class UserController {
     * Check User is Student Access
     *
     * */
-    public List<Users> findByIsStudent(boolean isStudent, Pageable pageable) {
-        return userService.findByIsStudentAccess(isStudent, pageable);
+    @GetMapping(value = "/student-{value}")
+    public List<Users> findByIsStudent(
+            @PathVariable("value") boolean isStudent,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIsStudentAccess(isStudent, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -159,8 +212,13 @@ public class UserController {
     * Check User is Parent Access
     *
     * */
-    public List<Users> findByIsParent(boolean isParent, Pageable pageable) {
-        return userService.findByIsParentAccess(isParent, pageable);
+    @GetMapping(value = "/parent-{value}")
+    public List<Users> findByIsParent(
+            @PathVariable("value") boolean isParent,
+            @RequestParam(value = "page", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return userService.findByIsParentAccess(isParent, PageRequest.of(pageNumber, pageSize));
     }
 
     /*
@@ -168,7 +226,8 @@ public class UserController {
     * Get User by ID
     *
     * */
-    public Users findByUserId(String id) {
+    @GetMapping(value = "/{id}")
+    public Users findByUserId(@PathVariable("id") String id) {
         return userService.findByUserId(id);
     }
 
