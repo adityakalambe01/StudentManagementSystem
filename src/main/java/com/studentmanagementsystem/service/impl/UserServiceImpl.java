@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Users save(Users users) {
 
-        if (userRepository.findByUserId(users.getEmailId()) != null) {
+        if (userRepository.findByEmailId(users.getEmailId()) != null) {
             return null;
         }
 
@@ -69,11 +69,12 @@ public class UserServiceImpl implements UserService {
             users.setUserId(UUID.randomUUID().toString());
         }
 
+        Boolean allPermissions = false;
+
         if (userRepository.count()==0){
-            users = setUserAccess(users,true);
-        }else {
-            users = setUserAccess(users,false);
+            allPermissions = true;
         }
+        users = setUserAccess(users,allPermissions);
         users.setRole(getRole(users));
         return userRepository.save(users);
     }
