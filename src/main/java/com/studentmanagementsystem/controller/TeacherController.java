@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,8 @@ public class TeacherController {
     * Get Teacher by ID
     *
     * */
-    public Teacher findById(int id){
+    @GetMapping(value = "/{id}")
+    public Teacher findById(@PathVariable("id") int id){
         return teacherService.findById(id);
     }
 
@@ -33,7 +31,8 @@ public class TeacherController {
     * Get Teacher List by First-Name
     *
     * */
-    public List<Teacher> findByFirstNameContaining(String firstName){
+    @GetMapping(value = "/first-name-{firstName}")
+    public List<Teacher> findByFirstNameContaining(@PathVariable("firstName") String firstName){
         return teacherService.findByFirstNameContaining(firstName);
     }
 
@@ -42,7 +41,8 @@ public class TeacherController {
     * Get Teacher List by Middle-Name
     *
     * */
-    public List<Teacher> findByMiddleNameContaining(String middleName){
+    @GetMapping(value = "/middle-name-{middleName}")
+    public List<Teacher> findByMiddleNameContaining(@PathVariable("middleName") String middleName){
         return teacherService.findByMiddleNameContaining(middleName);
     }
 
@@ -51,7 +51,8 @@ public class TeacherController {
     * Get Teacher by Last-Name
     *
     * */
-    public List<Teacher> findByLastNameContaining(String lastName){
+    @GetMapping(value = "/last-name-{lastName}")
+    public List<Teacher> findByLastNameContaining(@PathVariable("lastName") String lastName){
         return teacherService.findByLastNameContaining(lastName);
     }
 
@@ -60,7 +61,8 @@ public class TeacherController {
     * Get Teacher by Email ID
     *
     * */
-    public List<Teacher> findByEmailContaining(String email){
+    @GetMapping(value = "/email-{emailId}")
+    public List<Teacher> findByEmailContaining(@PathVariable("emailId") String email){
         return teacherService.findByEmailContaining(email);
     }
 
@@ -69,7 +71,8 @@ public class TeacherController {
     * Get Teacher by Phone Number
     *
     * */
-    public List<Teacher> findByPhoneNumberContaining(String phoneNumber){
+    @GetMapping(value = "/phone-number-{phoneNumber}")
+    public List<Teacher> findByPhoneNumberContaining(@PathVariable("phoneNumber") String phoneNumber){
         return teacherService.findByPhoneNumberContaining(phoneNumber);
     }
 
@@ -78,7 +81,8 @@ public class TeacherController {
     * Get Teacher by Gender
     *
     * */
-    public List<Teacher> findByGenderContaining(String gender){
+    @GetMapping(value = "/gender-{gender}")
+    public List<Teacher> findByGenderContaining(@PathVariable("gender") String gender){
         return teacherService.findByGenderContaining(gender);
     }
 
@@ -87,7 +91,8 @@ public class TeacherController {
     * Get Teacher by First-Name, Middle-Name and Last-Name
     *
     * */
-    public List<Teacher> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(String firstName, String middleName, String lastName, String email){
+    @GetMapping(value = "/first-name-{firstName}-middle-name-{middleName}-last-name-{lastName}-email-{email}")
+    public List<Teacher> findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(@PathVariable("firstName") String firstName, @PathVariable("middleName") String middleName, @PathVariable("lastName") String lastName, @PathVariable("email") String email){
         return teacherService.findByFirstNameOrMiddleNameOrLastNameOrEmailContaining(firstName, middleName, lastName, email);
     }
 
@@ -109,7 +114,8 @@ public class TeacherController {
     * Delete Teacher by ID
     *
     * */
-    public Teacher deleteById(int id){
+    @DeleteMapping(value = "/{id}")
+    public Teacher deleteById(@PathVariable("id") int id){
         return teacherService.deleteById(id);
     }
 }
